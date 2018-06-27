@@ -22,12 +22,12 @@ cd m4-1.4.17/
 ./configure --prefix=$prefix --host=$target
 make install
 cd ../bison-2.3/
-ls -la /usr/local/libiconv/
 ./configure --prefix=$prefix --host=$target
 make install
 cd ../thrift/
 ./bootstrap.sh
-./configure --prefix=$prefix --host=$target --without-erlang --without-ruby --without-qt4 --without-qt5 --without-c_glib --without-csharp --without-java --without-nodejs --without-lua --without-python --without-perl --without-php --without-php_extension --without-haskell --without-go --without-haxe --without-d
+./configure --prefix=$prefix --host=$target --without-rs --without-dart --without-dotnetcore --without-erlang --without-ruby --without-qt4 --without-qt5 --without-c_glib --without-csharp --without-java --without-nodejs --without-lua --without-python --without-perl --without-php --without-php_extension --without-haskell --without-go --without-haxe --without-d --enable-tutorial=false --enable-tests=false
+set +e
 make install
 exit
 
@@ -36,17 +36,7 @@ exit
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
 platforms = [
-    Linux(:i686, :glibc),
-    Linux(:x86_64, :glibc),
-    Linux(:aarch64, :glibc),
-    Linux(:armv7l, :glibc, :eabihf),
-    Linux(:powerpc64le, :glibc),
-    Linux(:i686, :musl),
-    Linux(:x86_64, :musl),
-    Linux(:aarch64, :musl),
-    Linux(:armv7l, :musl, :eabihf),
-    MacOS(:x86_64),
-    FreeBSD(:x86_64)
+    Linux(:x86_64, :glibc)
 ]
 
 # The products that we will ensure are always built
