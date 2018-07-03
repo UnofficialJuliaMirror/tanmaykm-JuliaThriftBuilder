@@ -14,8 +14,10 @@ script = raw"""
 cd $WORKSPACE/srcdir
 cd thrift/
 ./bootstrap.sh
-LDFLAGS="-static-libgcc -static-libstdc++"
-export LDFLAGS
+if [ $target != "x86_64-apple-darwin14" ]; then
+    LDFLAGS="-static-libgcc -static-libstdc++"
+    export LDFLAGS
+fi
 ./configure --prefix=$prefix --host=$target --enable-tutorial=no --enable-tests=no --enable-libs=no
 make install
 
