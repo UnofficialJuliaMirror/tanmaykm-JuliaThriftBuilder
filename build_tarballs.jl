@@ -14,7 +14,7 @@ script = raw"""
 cd $WORKSPACE/srcdir
 cd thrift/
 ./bootstrap.sh
-if [ $target != "x86_64-apple-darwin14" ]; then
+if [ $target != "x86_64-apple-darwin14" ] && [ $target != "x86_64-unknown-freebsd11.1" ]; then
     LDFLAGS="-static-libgcc -static-libstdc++"
     export LDFLAGS
 fi
