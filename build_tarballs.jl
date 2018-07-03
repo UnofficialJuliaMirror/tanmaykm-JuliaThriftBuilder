@@ -14,6 +14,8 @@ script = raw"""
 cd $WORKSPACE/srcdir
 cd thrift/
 ./bootstrap.sh
+LDFLAGS="-static-libgcc -static-libstdc++"
+export LDFLAGS
 ./configure --prefix=$prefix --host=$target --enable-tutorial=no --enable-tests=no --enable-libs=no
 make install
 
