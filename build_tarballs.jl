@@ -5,7 +5,7 @@ using BinaryBuilder
 # Collection of sources required to build JuliaThriftBuilder
 sources = [
     "https://github.com/tanmaykm/thrift.git" =>
-    "90fa5ccdc35a32517776ef0143aa62dfc42a19be",
+    "59fb95315bb32818bca9978b35d260948b717088",
 
 ]
 
@@ -41,7 +41,7 @@ platforms = [
 
 # The products that we will ensure are always built
 products(prefix) = [
-    ExecutableProduct(prefix, "", :thrift)
+    ExecutableProduct(prefix, "thrift", :thrift)
 ]
 
 # Dependencies that must be installed before this package can be built
