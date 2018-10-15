@@ -2,7 +2,7 @@ language: julia
 os:
   - linux
 julia:
-  - 0.6
+  - 1.0
 notifications:
   email: false
 git:
@@ -27,8 +27,8 @@ jobs:
       if: tag IS present      
 # Before anything else, get the latest versions of things
 before_script:
-  - julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryProvider.jl")'
-  - julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryBuilder.jl"); Pkg.build()'
+  - julia -e 'using Pkg; Pkg.add("BinaryProvider")'
+  - julia -e 'using Pkg; Pkg.clone("BinaryBuilder"); Pkg.build()'
 
 script:
   - julia build_tarballs.jl --part=$PART
