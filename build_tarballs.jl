@@ -2,10 +2,13 @@
 # `julia build_tarballs.jl --help` to see a usage message.
 using BinaryBuilder
 
+name = "JuliaThriftBuilder"
+version = v"0.2.0"
+
 # Collection of sources required to build JuliaThriftBuilder
 sources = [
     "https://github.com/tanmaykm/thrift.git" =>
-    "59fb95315bb32818bca9978b35d260948b717088",
+    "ef6de66707eb6135402a73520deec3478d9e1ec7",
 
 ]
 
@@ -18,7 +21,7 @@ if [ $target != "x86_64-apple-darwin14" ] && [ $target != "x86_64-unknown-freebs
     LDFLAGS="-static-libgcc -static-libstdc++"
     export LDFLAGS
 fi
-./configure --prefix=$prefix --host=$target --enable-tutorial=no --enable-tests=no --enable-libs=no
+./configure --prefix=$prefix --host=$target --enable-tutorial=no --enable-tests=no --enable-libs=no --disable-werror
 make install
 
 """
@@ -26,15 +29,15 @@ make install
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
 platforms = [
-    Linux(:i686, :glibc),
-    Linux(:x86_64, :glibc),
-    Linux(:aarch64, :glibc),
-    Linux(:armv7l, :glibc, :eabihf),
-    Linux(:powerpc64le, :glibc),
-    Linux(:i686, :musl),
-    Linux(:x86_64, :musl),
-    Linux(:aarch64, :musl),
-    Linux(:armv7l, :musl, :eabihf),
+    Linux(:i686, libc=:glibc),
+    Linux(:x86_64, libc=:glibc),
+    Linux(:aarch64, libc=:glibc),
+    Linux(:armv7l, libc=:glibc, call_abi=:eabihf),
+    Linux(:powerpc64le, libc=:glibc),
+    Linux(:i686, libc=:musl),
+    Linux(:x86_64, libc=:musl),
+    Linux(:aarch64, libc=:musl),
+    Linux(:armv7l, libc=:musl, call_abi=:eabihf),
     MacOS(:x86_64),
     FreeBSD(:x86_64)
 ]
@@ -50,4 +53,4 @@ dependencies = [
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, "JuliaThriftBuilder", sources, script, platforms, products, dependencies)
+build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies)
